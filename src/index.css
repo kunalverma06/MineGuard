@@ -8,33 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* AgroEye Agricultural Theme */
+    --background: 110 25% 97%; /* #F4F7F3 - Light agro background */
+    --foreground: 0 0% 12%; /* #1F1F1F - Dark text */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Agro Green Primary */
+    --primary: 107 64% 37%; /* #3A9D23 - Agro Green */
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Harvest Yellow Secondary */
+    --secondary: 49 100% 58%; /* #FFD633 - Harvest Yellow */
+    --secondary-foreground: 0 0% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 110 15% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Info Blue Accent */
+    --accent: 207 90% 54%; /* #2196F3 - Info blue */
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Alert Orange */
+    --destructive: 24 100% 50%; /* #FF6F00 - Alert orange */
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 110 15% 88%;
+    --input: 110 15% 94%;
+    --ring: 107 64% 37%;
+
+    /* Custom Agricultural Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(107 64% 37%), hsl(107 54% 47%));
+    --gradient-secondary: linear-gradient(135deg, hsl(49 100% 58%), hsl(49 90% 68%));
+    --gradient-hero: linear-gradient(135deg, hsl(107 64% 37%) 0%, hsl(107 54% 47%) 50%, hsl(49 100% 58%) 100%);
+    
+    /* Agricultural Shadows */
+    --shadow-soft: 0 4px 20px hsl(107 64% 37% / 0.1);
+    --shadow-elevated: 0 8px 30px hsl(107 64% 37% / 0.15);
+    
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
 
