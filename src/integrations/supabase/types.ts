@@ -14,16 +14,299 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          metadata: Json | null
+          role: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "chat_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crops: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          duration_days: number | null
+          expected_yield: number | null
+          farming_tips: string | null
+          id: string
+          image_url: string | null
+          name: string
+          name_hindi: string | null
+          name_local: string | null
+          profit_per_acre: number | null
+          season: string
+          soil_type: string | null
+          temperature_max: number | null
+          temperature_min: number | null
+          water_requirement: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          duration_days?: number | null
+          expected_yield?: number | null
+          farming_tips?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          name_hindi?: string | null
+          name_local?: string | null
+          profit_per_acre?: number | null
+          season: string
+          soil_type?: string | null
+          temperature_max?: number | null
+          temperature_min?: number | null
+          water_requirement?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration_days?: number | null
+          expected_yield?: number | null
+          farming_tips?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          name_hindi?: string | null
+          name_local?: string | null
+          profit_per_acre?: number | null
+          season?: string
+          soil_type?: string | null
+          temperature_max?: number | null
+          temperature_min?: number | null
+          water_requirement?: string | null
+        }
+        Relationships: []
+      }
+      government_schemes: {
+        Row: {
+          application_process: string | null
+          application_url: string | null
+          benefits: string | null
+          category: string
+          created_at: string
+          description: string
+          documents_required: string[] | null
+          eligibility: string | null
+          end_date: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          name_hindi: string | null
+          start_date: string | null
+          state: string | null
+        }
+        Insert: {
+          application_process?: string | null
+          application_url?: string | null
+          benefits?: string | null
+          category: string
+          created_at?: string
+          description: string
+          documents_required?: string[] | null
+          eligibility?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          name_hindi?: string | null
+          start_date?: string | null
+          state?: string | null
+        }
+        Update: {
+          application_process?: string | null
+          application_url?: string | null
+          benefits?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          documents_required?: string[] | null
+          eligibility?: string | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          name_hindi?: string | null
+          start_date?: string | null
+          state?: string | null
+        }
+        Relationships: []
+      }
+      market_prices: {
+        Row: {
+          created_at: string
+          crop_name: string
+          date: string
+          district: string | null
+          id: string
+          market_name: string
+          price_max: number
+          price_min: number
+          price_modal: number
+          state: string
+          unit: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_name: string
+          date?: string
+          district?: string | null
+          id?: string
+          market_name: string
+          price_max: number
+          price_min: number
+          price_modal: number
+          state: string
+          unit?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string
+          date?: string
+          district?: string | null
+          id?: string
+          market_name?: string
+          price_max?: number
+          price_min?: number
+          price_modal?: number
+          state?: string
+          unit?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          farm_size: number | null
+          full_name: string | null
+          id: string
+          location: string | null
+          phone: string | null
+          preferred_language: string | null
+          primary_crops: string[] | null
+          state: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          farm_size?: number | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          primary_crops?: string[] | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          farm_size?: number | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          preferred_language?: string | null
+          primary_crops?: string[] | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["user_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_role: "farmer" | "agent" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +433,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["farmer", "agent", "admin"],
+    },
   },
 } as const
