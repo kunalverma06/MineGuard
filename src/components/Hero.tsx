@@ -53,9 +53,14 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button variant="harvest" size="lg" className="text-lg">
+            <Button 
+              variant="harvest" 
+              size="lg" 
+              className="text-lg"
+              onClick={() => window.location.href = '/chat'}
+            >
               <MessageCircle className="h-5 w-5 mr-2" />
-              Try WhatsApp Bot
+              Chat with AI
             </Button>
             <Button variant="outline" size="lg" className="text-lg bg-white/10 border-white/30 text-white hover:bg-white/20">
               Watch Demo
