@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MessageCircle, Mic } from "lucide-react";
+import { Search, MessageCircle } from "lucide-react";
 import heroImage from "@/assets/hero-farming.jpg";
 
 const Hero = () => {
@@ -41,9 +41,6 @@ const Hero = () => {
                 />
               </div>
               <div className="flex gap-3">
-                <Button size="lg" variant="ghost" className="h-14 px-4">
-                  <Mic className="h-5 w-5" />
-                </Button>
                 <Button size="lg" variant="hero" className="h-14 px-8">
                   Search
                 </Button>
