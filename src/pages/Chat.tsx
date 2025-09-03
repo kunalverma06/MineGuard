@@ -184,16 +184,16 @@ How can I assist you with your farming needs today?`,
       </div>
 
       {/* Enhanced Chat Area */}
-      <div className="container mx-auto px-4 py-6 max-w-4xl">
-        <Card className="h-[calc(100vh-180px)] flex flex-col shadow-elevated border-0 bg-card/95 backdrop-blur-sm">
+      <div className="container mx-auto px-4 py-6 max-w-4xl pb-32">
+        <Card className="shadow-elevated border-0 bg-card/95 backdrop-blur-sm">
           <CardHeader className="pb-4 border-b border-muted/20">
             <CardTitle className="text-lg flex items-center gap-2">
               <Bot className="h-5 w-5 text-primary" />
               Chat with AI Assistant
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col p-0">
-            <ScrollArea className="flex-1 px-6 py-4">
+          <CardContent className="p-0">
+            <ScrollArea className="h-[calc(100vh-300px)] px-6 py-4">
               <div className="space-y-6">
                 {messages.map((message) => (
                   <div
@@ -245,41 +245,43 @@ How can I assist you with your farming needs today?`,
                 <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
-
-            {/* Enhanced Input Area */}
-            <div className="border-t border-muted/20 p-6 bg-muted/10">
-              <div className="flex gap-3 items-end">
-                <div className="flex-1">
-                  <Input
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder="Ask about crops, weather, government schemes, or farming tips..."
-                    className="min-h-[44px] resize-none bg-background/80 border-muted/30 focus:border-primary/50 transition-smooth"
-                    disabled={isLoading}
-                  />
-                </div>
-                <Button 
-                  onClick={sendMessage} 
-                  disabled={!inputMessage.trim() || isLoading}
-                  size="lg"
-                  className="bg-gradient-primary hover:opacity-90 shadow-soft transition-smooth min-h-[44px] px-6"
-                >
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <p className="text-xs text-muted-foreground">
-                  Press Enter to send • Shift+Enter for new line
-                </p>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <span>AI Ready</span>
-                </div>
-              </div>
-            </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Fixed Input Area */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-br from-background to-muted/30 border-t border-muted/20 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-6 max-w-4xl">
+          <div className="flex gap-3 items-end">
+            <div className="flex-1">
+              <Input
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder="Ask about crops, weather, government schemes, or farming tips..."
+                className="min-h-[44px] resize-none bg-background/80 border-muted/30 focus:border-primary/50 transition-smooth"
+                disabled={isLoading}
+              />
+            </div>
+            <Button 
+              onClick={sendMessage} 
+              disabled={!inputMessage.trim() || isLoading}
+              size="lg"
+              className="bg-gradient-primary hover:opacity-90 shadow-soft transition-smooth min-h-[44px] px-6"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="flex items-center justify-between mt-3">
+            <p className="text-xs text-muted-foreground">
+              Press Enter to send • Shift+Enter for new line
+            </p>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="w-2 h-2 bg-primary rounded-full"></div>
+              <span>AI Ready</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
