@@ -153,27 +153,29 @@ How can I assist you with your farming needs today?`,
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b bg-card">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
+      {/* Enhanced Header */}
+      <div className="border-b bg-card/80 backdrop-blur-sm shadow-soft">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate("/")}
-              className="p-2"
+              className="p-2 hover:bg-muted/50 transition-smooth"
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
                 <Bot className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold">AgroEye AI Assistant</h1>
+                <h1 className="text-xl font-semibold bg-gradient-primary bg-clip-text text-transparent">
+                  AgroEye AI Assistant
+                </h1>
                 <p className="text-sm text-muted-foreground">
-                  Always here to help with your farming needs
+                  🌾 Always here to help with your farming needs
                 </p>
               </div>
             </div>
@@ -181,59 +183,61 @@ How can I assist you with your farming needs today?`,
         </div>
       </div>
 
-      {/* Chat Area */}
+      {/* Enhanced Chat Area */}
       <div className="container mx-auto px-4 py-6 max-w-4xl">
-        <Card className="h-[calc(100vh-200px)] flex flex-col">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg">Chat with AI Assistant</CardTitle>
+        <Card className="h-[calc(100vh-180px)] flex flex-col shadow-elevated border-0 bg-card/95 backdrop-blur-sm">
+          <CardHeader className="pb-4 border-b border-muted/20">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Bot className="h-5 w-5 text-primary" />
+              Chat with AI Assistant
+            </CardTitle>
           </CardHeader>
           <CardContent className="flex-1 flex flex-col p-0">
-            <ScrollArea className="flex-1 px-6">
-              <div className="space-y-4">
+            <ScrollArea className="flex-1 px-6 py-4">
+              <div className="space-y-6">
                 {messages.map((message) => (
                   <div
                     key={message.id}
                     className={`flex gap-3 ${
                       message.role === 'user' ? 'justify-end' : 'justify-start'
-                    }`}
+                    } animate-in slide-in-from-bottom-2 duration-300`}
                   >
                     {message.role === 'assistant' && (
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
                         <Bot className="h-4 w-4 text-primary-foreground" />
                       </div>
                     )}
                     <div
-                      className={`max-w-[70%] p-3 rounded-lg ${
+                      className={`max-w-[75%] p-4 rounded-2xl transition-smooth ${
                         message.role === 'user'
-                          ? 'bg-primary text-primary-foreground ml-12'
-                          : 'bg-muted'
+                          ? 'bg-gradient-primary text-primary-foreground shadow-soft ml-12'
+                          : 'bg-muted/50 border border-muted/20'
                       }`}
                     >
-                      <p className="whitespace-pre-wrap">{message.content}</p>
-                      <p className={`text-xs mt-2 ${
-                        message.role === 'user' 
-                          ? 'text-primary-foreground/70' 
-                          : 'text-muted-foreground'
-                      }`}>
-                        {message.timestamp.toLocaleTimeString()}
+                      <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                      <p className={`text-xs mt-2 opacity-70`}>
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
                       </p>
                     </div>
                     {message.role === 'user' && (
-                      <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 bg-gradient-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
                         <User className="h-4 w-4 text-secondary-foreground" />
                       </div>
                     )}
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="flex gap-3 justify-start">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="flex gap-3 justify-start animate-in slide-in-from-bottom-2 duration-300">
+                    <div className="w-9 h-9 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-soft">
                       <Bot className="h-4 w-4 text-primary-foreground" />
                     </div>
-                    <div className="bg-muted p-3 rounded-lg">
+                    <div className="bg-muted/50 border border-muted/20 p-4 rounded-2xl">
                       <div className="flex items-center gap-2">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Thinking...</span>
+                        <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                        <span className="text-sm">AI is thinking...</span>
                       </div>
                     </div>
                   </div>
@@ -242,28 +246,37 @@ How can I assist you with your farming needs today?`,
               </div>
             </ScrollArea>
 
-            {/* Input Area */}
-            <div className="border-t p-4">
-              <div className="flex gap-2">
-                <Input
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyDown={handleKeyPress}
-                  placeholder="Ask about crops, weather, government schemes, or farming tips..."
-                  className="flex-1"
-                  disabled={isLoading}
-                />
+            {/* Enhanced Input Area */}
+            <div className="border-t border-muted/20 p-6 bg-muted/10">
+              <div className="flex gap-3 items-end">
+                <div className="flex-1">
+                  <Input
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                    placeholder="Ask about crops, weather, government schemes, or farming tips..."
+                    className="min-h-[44px] resize-none bg-background/80 border-muted/30 focus:border-primary/50 transition-smooth"
+                    disabled={isLoading}
+                  />
+                </div>
                 <Button 
                   onClick={sendMessage} 
                   disabled={!inputMessage.trim() || isLoading}
                   size="lg"
+                  className="bg-gradient-primary hover:opacity-90 shadow-soft transition-smooth min-h-[44px] px-6"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground mt-2 text-center">
-                Press Enter to send, Shift+Enter for new line
-              </p>
+              <div className="flex items-center justify-between mt-3">
+                <p className="text-xs text-muted-foreground">
+                  Press Enter to send • Shift+Enter for new line
+                </p>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>AI Ready</span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
