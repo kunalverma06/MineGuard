@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Leaf, Menu, X, User, LogOut } from "lucide-react";
+import { Mountain, Menu, X, User, LogOut, Activity, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -11,22 +11,16 @@ const Header = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Get initial session
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user || null);
-      
-      if (session?.user) {
-        checkAdminRole(session.user.id);
-      }
+      if (session?.user) checkAdminRole(session.user.id);
     };
     getSession();
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (_, session) => {
         setUser(session?.user || null);
-        
         if (session?.user) {
           checkAdminRole(session.user.id);
         } else {
@@ -41,14 +35,14 @@ const Header = () => {
   const checkAdminRole = async (userId: string) => {
     try {
       const { data } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId)
         .single();
-      
-      setIsAdmin(data?.role === 'admin');
+
+      setIsAdmin(data?.role === "admin");
     } catch (error) {
-      console.error('Error checking admin role:', error);
+      console.error("Error checking admin role:", error);
       setIsAdmin(false);
     }
   };
@@ -80,24 +74,27 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Leaf className="h-5 w-5 text-primary-foreground" />
+              <Mountain className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-foreground">AgroEye</span>
+            <span className="text-xl font-bold text-foreground">MineSafe AI</span>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-[2.2rem] ">
             <a href="/" className="text-foreground hover:text-primary transition-smooth">
               Home
             </a>
-            <a href="/chat" className="text-foreground hover:text-primary transition-smooth">
-              AI Chat
+            <a href="/dashboard" className="text-foreground hover:text-primary transition-smooth">
+              Dashboard
             </a>
-            <a href="#features" className="text-foreground hover:text-primary transition-smooth">
-              Features
+            <a href="/risk-map" className="text-foreground hover:text-primary transition-smooth">
+              Risk Map
             </a>
-            <a href="#crops" className="text-foreground hover:text-primary transition-smooth">
-              Crops
+            <a href="/forecasts" className="text-foreground hover:text-primary transition-smooth">
+              Forecasts
+            </a>
+            <a href="/alerts" className="text-foreground hover:text-primary transition-smooth">
+              Alerts
             </a>
             {isAdmin && (
               <a href="/admin" className="text-foreground hover:text-primary transition-smooth">
@@ -106,14 +103,14 @@ const Header = () => {
             )}
           </nav>
 
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Auth */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
                   <User className="h-4 w-4" />
                   <span className="text-sm text-foreground">
-                    {user.email?.split('@')[0]}
+                    {user.email?.split("@")[0]}
                   </span>
                 </div>
                 <Button
@@ -144,11 +141,7 @@ const Header = () => {
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
@@ -156,60 +149,36 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
-              <a
-                href="/"
-                className="text-foreground hover:text-primary transition-smooth py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <a href="/" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
                 Home
               </a>
-              <a
-                href="/chat"
-                className="text-foreground hover:text-primary transition-smooth py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                AI Chat
+              <a href="/dashboard" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
+                Dashboard
               </a>
-              <a
-                href="#features"
-                className="text-foreground hover:text-primary transition-smooth py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Features
+              <a href="/risk-map" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
+                Risk Map
               </a>
-              <a
-                href="#crops"
-                className="text-foreground hover:text-primary transition-smooth py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Crops
+              <a href="/forecasts" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
+                Forecasts
+              </a>
+              <a href="/alerts" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
+                Alerts
               </a>
               {isAdmin && (
-                <a
-                  href="/admin"
-                  className="text-foreground hover:text-primary transition-smooth py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+                <a href="/admin" className="text-foreground hover:text-primary transition-smooth py-2" onClick={() => setIsMenuOpen(false)}>
                   Admin Panel
                 </a>
               )}
-              
+
               {/* Mobile Auth */}
               <div className="pt-4 border-t border-border">
                 {user ? (
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2 py-2">
                       <User className="h-4 w-4" />
-                      <span className="text-sm text-foreground">
-                        {user.email?.split('@')[0]}
-                      </span>
+                      <span className="text-sm text-foreground">{user.email?.split("@")[0]}</span>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleSignOut}
-                      className="w-full flex items-center justify-center space-x-1"
-                    >
+                    <Button variant="outline" size="sm" onClick={handleSignOut} className="w-full flex items-center justify-center space-x-1">
                       <LogOut className="h-4 w-4" />
                       <span>Sign Out</span>
                     </Button>
@@ -217,14 +186,10 @@ const Header = () => {
                 ) : (
                   <div className="flex flex-col space-y-2">
                     <Button variant="ghost" size="sm" asChild className="justify-start">
-                      <a href="/auth" onClick={() => setIsMenuOpen(false)}>
-                        Sign In
-                      </a>
+                      <a href="/auth" onClick={() => setIsMenuOpen(false)}>Sign In</a>
                     </Button>
                     <Button size="sm" asChild className="justify-start">
-                      <a href="/auth" onClick={() => setIsMenuOpen(false)}>
-                        Get Started
-                      </a>
+                      <a href="/auth" onClick={() => setIsMenuOpen(false)}>Get Started</a>
                     </Button>
                   </div>
                 )}

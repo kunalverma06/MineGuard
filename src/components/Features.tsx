@@ -1,65 +1,65 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
+  Map, 
+  Activity, 
+  Database, 
+  Camera, 
+  AlertTriangle, 
   CloudRain, 
-  TrendingUp, 
   FileText, 
-  Beaker, 
-  MessageSquare, 
-  Smartphone,
-  Globe,
-  Shield
+  Settings 
 } from "lucide-react";
 
 const Features = () => {
   const features = [
     {
-      icon: <CloudRain className="h-8 w-8 text-accent" />,
-      title: "Weather Insights",
-      description: "7-day forecasts, rain alerts, and season-specific guidance to plan your farming activities.",
+      icon: <Map className="h-8 w-8 text-primary" />,
+      title: "Real-time Risk Maps",
+      description: "Visualize vulnerable mine zones with color-coded severity levels powered by AI models.",
+      badge: "Live"
+    },
+    {
+      icon: <Activity className="h-8 w-8 text-accent" />,
+      title: "Probability Forecasts",
+      description: "Get predictive insights with probability-based forecasts for rockfall risks over time.",
+      badge: "AI"
+    },
+    {
+      icon: <Database className="h-8 w-8 text-secondary" />,
+      title: "Sensor Data Monitoring",
+      description: "Track geotechnical data such as displacement, strain, and pore pressure in real time.",
+      badge: "IoT"
+    },
+    {
+      icon: <Camera className="h-8 w-8 text-destructive" />,
+      title: "Drone & DEM Integration",
+      description: "Process drone-captured imagery and digital elevation models for slope stability analysis.",
+      badge: "3D"
+    },
+    {
+      icon: <AlertTriangle className="h-8 w-8 text-warning" />,
+      title: "Instant Alerts",
+      description: "Receive SMS/email alerts with severity levels and suggested action plans for safety.",
+      badge: "Critical"
+    },
+    {
+      icon: <CloudRain className="h-8 w-8 text-blue-500" />,
+      title: "Environmental Tracking",
+      description: "Monitor rainfall, temperature, and vibrations to factor environmental risks into predictions.",
       badge: "Live Data"
     },
     {
-      icon: <TrendingUp className="h-8 w-8 text-primary" />,
-      title: "Mandi Prices",
-      description: "Real-time market prices from nearby mandis with trend analysis and price predictions.",
-      badge: "Real-time"
-    },
-    {
       icon: <FileText className="h-8 w-8 text-secondary" />,
-      title: "Government Schemes",
-      description: "Access to latest agricultural schemes, subsidies, and application assistance.",
-      badge: "Updated"
+      title: "Reports & Action Plans",
+      description: "Download risk assessment reports and recommended mitigation strategies instantly.",
+      badge: "PDF/CSV"
     },
     {
-      icon: <Beaker className="h-8 w-8 text-destructive" />,
-      title: "Fertilizer Guidance",
-      description: "Soil-specific fertilizer recommendations and crop nutrition advice.",
-      badge: "Expert"
-    },
-    {
-      icon: <MessageSquare className="h-8 w-8 text-accent" />,
-      title: "WhatsApp Bot",
-      description: "Get instant answers via WhatsApp in your preferred language.",
-      badge: "24/7"
-    },
-    {
-      icon: <Smartphone className="h-8 w-8 text-primary" />,
-      title: "Voice Search",
-      description: "Ask questions in your voice - works in Hindi, Tamil, Marathi, and more.",
-      badge: "Multi-lingual"
-    },
-    {
-      icon: <Globe className="h-8 w-8 text-secondary" />,
-      title: "Offline Support",
-      description: "Access critical information even without internet connectivity.",
-      badge: "PWA"
-    },
-    {
-      icon: <Shield className="h-8 w-8 text-destructive" />,
-      title: "Trusted Advice",
-      description: "Verified information from agricultural experts and government sources.",
-      badge: "Verified"
+      icon: <Settings className="h-8 w-8 text-primary" />,
+      title: "Custom Integration",
+      description: "Easily integrate with low-cost monitoring hardware and open-source tools for scalability.",
+      badge: "Flexible"
     }
   ];
 
@@ -68,11 +68,11 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Everything Farmers Need
+            Intelligent Mine Safety Features
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From weather updates to market prices, we provide comprehensive 
-            agricultural intelligence to help you make informed decisions.
+            From real-time monitoring to predictive analytics, our platform 
+            equips mine planners with the tools they need for safer operations.
           </p>
         </div>
 
